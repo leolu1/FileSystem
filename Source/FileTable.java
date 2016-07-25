@@ -34,32 +34,10 @@ public class FileTable
      * @param filename the file name
      * @param mode the mode such as "r", "w", "w+", or "a"
      * @return a reference to the file table entry
-     * 
-     * edited 7/23/16 by Midori
      */
     public synchronized FileTableEntry falloc(String filename, String mode)
     {
-        seekPt =0
-        iNode = i;
-        iNumber = inumber;
-        count = 1; 
- 
-        //modes available
-        mode = mode.toLowerCase();
-        if (mode.compareTo("r") == 0)
-            return READONLY;
-        if (mode.compareTo("w") == 0)
-            return WRITEONLY;
-        if (mode.compareTo("w+") == 0)
-            return READWRITE;
-        if (mode.compareTo("a") == 0)
-            return APPEND;
-        return -1;
- 
- 
-        iNode.count++; increment
-        if (mode == APPEND) // if mode is append
-            seekPtr = iNode.length; // seekPtr points to the end of file
+        return null; // needs to be coded
     }
 
     /**
