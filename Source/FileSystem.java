@@ -32,7 +32,6 @@ public class FileSystem
         filetable = new FileTable(directory);
 
         // reconstruct the directory
-        /*
         FileTableEntry dirEnt = open("/", "r");
         int dirSize = fsize(dirEnt);
         if(dirSize > 0)
@@ -41,7 +40,7 @@ public class FileSystem
             read(dirEnt, dirData);
             directory.bytes2directory(dirData);
         }
-        close(dirEnt);*/
+        close(dirEnt);
     }
 
     // the description of sync will be added more info later
@@ -72,16 +71,16 @@ public class FileSystem
      * @return int fd
      * between 3 to 31
      */
-    public int open(String fileName, String mode)
+    public FileTableEntry open(String fileName, String mode)
     {
-        // FileTableEntry newfte = filetable.falloc(fileName, mode);
+        FileTableEntry newfte = filetable.falloc(fileName, mode);
         // for tcb.ftENT's length
         // if a spot is null
         // insert newfte
         // return current index
         //...
         // return -1 if error
-        return 0; // it needs to be modified later
+        return null; // it needs to be modified later
     }
 
     /**
