@@ -12,7 +12,7 @@ public class TCB
     private int pid = 0;
     private boolean terminate = false;
     private final static int FILE_TABLE_ENTRY_SIZE = 32;
-    
+
     // User file descriptor table:
     // each entry pointing to a file (structure) table entry
     public FileTableEntry[] ftEnt = null;
@@ -32,7 +32,7 @@ public class TCB
         this.tid = tid;
         this.pid = pid;
         terminate = false;
-        
+
         // The following code is added for the file system
         ftEnt = new FileTableEntry[FILE_TABLE_ENTRY_SIZE];
     }
@@ -116,8 +116,12 @@ public class TCB
         // if 3 <= fd <= FILE_TABLE_ENTRY_SIZE
         if (fd >= 3 && fd <= FILE_TABLE_ENTRY_SIZE)
         {
-            return ftEnt[fd];
+            FileTableEntry oldFtEtn = ftEnt[fd];
+            ftEnt[fd] = null;
+            return oldFtEtn;
         }
+
+        return null;
     }
 
     /**
