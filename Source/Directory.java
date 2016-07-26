@@ -8,7 +8,7 @@
 public class Directory
 {
     private static int maxChars = 30;   // max characters of each file name
-    
+
     // Directory entries
     private int fsize[];
     private char fnames[][];
@@ -34,19 +34,26 @@ public class Directory
      * @param data the data[] received directory information from disk
      * @return                                                  // It needs to be added later
      * edited by Midori on 7/23/16
+     * Jesse: edited so it will compile
      * code added from slides
      */
     public int bytes2directory(byte data[])
     {
-        Int offset = 0; //needed for SysLib call
-        
-        For ( int i = 0; i < fsize.length; i++, offset += 4 )
-	        Fsizes[ i ] = SysLib.bytes2int( data, offset );
-        
-        For ( int i = 0; i < fnames.length; i++, offset += maxChars * 2 ) {
-	        String fname = new String( data, offset, maxChars *2 );
-	        fname.getChars( 0, fsizes[ i ], fnames[ i ], 0 );
+        int offset = 0; //needed for SysLib call
+
+        for( int i = 0; i < fsize.length; i++, offset += 4 )
+            fsize[ i ] = SysLib.bytes2int( data, offset );
+
+        for( int i = 0; i < fnames.length; i++, offset += maxChars * 2 )
+        {
+            String fname = new String(data, offset, maxChars * 2);
+            fname.getChars(0, fsize[i], fnames[i], 0);
         }
+
+        return 0; // it needs fixed since this function is incomplete
+    }
+
+
 
     /**
      * This method converts and return Directory information into a plain
@@ -56,6 +63,8 @@ public class Directory
      */
     public byte[] directory2bytes()
     {
+        // convert fnames/fisize to byte[]
+        // return converted data
         return null; // It needs to be modified later
     }
 
@@ -68,6 +77,9 @@ public class Directory
      */
     public short ialloc(String filename)
     {
+        // newINumber = new inode number for filename
+        // fnames[filename][newINumber], insert in fnames
+        // return newInumber
         return 0; // It needs to be modified later
     }
 
@@ -81,7 +93,14 @@ public class Directory
      */
     public boolean ifree(short iNumber)
     {
-        
+        // for the length of fnames
+        // if the current inode number matches iNumber
+        // for the length of ftEnt in TCB
+        // if the current inode has inumber that matches iNumer
+        // delete somehow
+        // remove inumber and file from fnames
+        // ...
+        // return if dellocation is successful
         return false; // It needs to be modified later
     }
 
@@ -89,10 +108,15 @@ public class Directory
      * This method returns the inumber corresoponding to this filename
      *
      * @param filename the file name
-     * @return the inode number corresponding to this file name
+     * @return the inode number corresponding to this file name, or -1 if not found
      */
     public short namei(String filename)
     {
+        // for the length of fnames
+        // if the current fname matches filename
+        // return the inode number at this index
+        // ...
+        // return -1, because not found
         return 0; // It needs to be modified later
     }
 }
